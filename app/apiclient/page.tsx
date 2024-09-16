@@ -103,7 +103,7 @@ const Page = () => {
   }
 
 //handle PUT operation
-const handleUpdate =async ()=>{
+const handleUpdate =async ()=> {
   try {
     const res = await fetch('http://localhost:3000/restAPI', {
       method: 'PUT',

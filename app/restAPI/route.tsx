@@ -1,6 +1,7 @@
 import pool from "@/app/lib/testingDb";
 import { ResultSetHeader } from "mysql2";
 import {NextRequest, NextResponse } from "next/server";
+
 interface myError  {
     message: string,
     code: string,
@@ -10,13 +11,17 @@ interface myError  {
 
 }
 
+//Api logic for all the CRUD application
 const handler = async (req:NextRequest)=> {
     switch(req.method) {
         case 'GET': {
             try {
                 const [rows] = await pool.query('SELECT * FROM person');
                 // console.log(rows);
-                return NextResponse.json(rows, { status: 200 });
+                return NextResponse.json(
+                    rows,
+                    { status: 200 }
+                );
             } catch (error) {
                 return NextResponse.json(
                     { error: 'Failed to reach the database' },
@@ -26,7 +31,7 @@ const handler = async (req:NextRequest)=> {
         }
         case 'POST' : {
             const body = await req.json();
-            console.log(body);
+            // console.log(body);
         
             const {ID,fname, sname, telNumber}= body//de-structure the single keys in the json data so you can use them separately in the sql
              if(!ID || !fname || !sname || !telNumber) {
