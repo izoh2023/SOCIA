@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import QRCode from "qrcode";
+import Image from "next/image";
 
 const QRCodeGenerator = () => {
   const [qrCodeUrl, setQrCodeUrl] = useState(""); // State to store the generated QR code URL
@@ -30,7 +31,7 @@ const QRCodeGenerator = () => {
       {qrCodeUrl && (
         <div>
           <h3>Your QR Code:</h3>
-          <img src={qrCodeUrl} alt="QR Code" />
+          <Image src={qrCodeUrl} alt="QR Code" width={500} height={500} className="w-auto h-auto" />
         </div>
       )}
     </div>
