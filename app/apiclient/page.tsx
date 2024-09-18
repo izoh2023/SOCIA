@@ -27,37 +27,42 @@ const Page = () => {
     telNumber: telNumberValue
   }
 
+  useEffect(()=>{
   //handle the when the update icon button in a row is clicked 
-   document.querySelectorAll<HTMLButtonElement>('.get-row-data').forEach(button => {
-    button.addEventListener('click', function() {
-      // Get the closest table row (tr) for the clicked button
-      const row = this.closest('tr') as HTMLTableRowElement;
-      
-      if (row) {
-        // Get all the cell values in that row
-        const cells = row.getElementsByTagName('td');
-        const rowData: person = {
-          ID: parseInt(cells[1]?.textContent || "0"), // Convert ID to number
-          fname: cells[2]?.textContent || "",         // First name as string
-          sname: cells[3]?.textContent || "",         // Second name as string
-          telNumber: cells[4]?.textContent || ""      // Tel number as string
-        }
-        setID(rowData.ID);
-        setFname(rowData.fname);
-        setSname(rowData.sname);
-        setTelNumber(rowData.telNumber)
-        
-        const idField = (document.getElementById('ID') as HTMLInputElement);
-        idField.valueAsNumber = rowData.ID || 0;
-        idField.readOnly = true;
-        (document.getElementById('fname') as HTMLInputElement).value =rowData.fname || '';
-        (document.getElementById('sname') as HTMLInputElement).value = rowData.sname || '';     
-        (document.getElementById('telNumber') as HTMLInputElement).value = rowData.telNumber || ''; 
-        setIsClicked(true);
-        
-      }
-    });
-  });
+
+    document.querySelectorAll<HTMLButtonElement>('.get-row-data').forEach(button => {
+     button.addEventListener('click', function() {
+       // Get the closest table row (tr) for the clicked button
+       const row = this.closest('tr') as HTMLTableRowElement;
+       
+       if (row) {
+         // Get all the cell values in that row
+         const cells = row.getElementsByTagName('td');
+         const rowData: person = {
+           ID: parseInt(cells[1]?.textContent || "0"), // Convert ID to number
+           fname: cells[2]?.textContent || "",         // First name as string
+           sname: cells[3]?.textContent || "",         // Second name as string
+           telNumber: cells[4]?.textContent || ""      // Tel number as string
+         }
+         setID(rowData.ID);
+         setFname(rowData.fname);
+         setSname(rowData.sname);
+         setTelNumber(rowData.telNumber)
+         
+         const idField = (document.getElementById('ID') as HTMLInputElement);
+         idField.valueAsNumber = rowData.ID || 0;
+         idField.readOnly = true;
+         (document.getElementById('fname') as HTMLInputElement).value =rowData.fname || '';
+         (document.getElementById('sname') as HTMLInputElement).value = rowData.sname || '';     
+         (document.getElementById('telNumber') as HTMLInputElement).value = rowData.telNumber || ''; 
+         setIsClicked(true);
+         
+       }
+     });
+   });
+
+  },[])
+  
 
   function clearInputs(){
     (document.getElementById('ID') as HTMLInputElement).valueAsNumber = NaN;

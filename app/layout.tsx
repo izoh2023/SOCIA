@@ -30,10 +30,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <header className="w-full h-[75px] bg-[#f4f4f4] sticky top-0 left-0 z-10">
+        <header className="w-full h-auto bg-[#f4f4f4] sticky top-0 left-0 z-10">
           <nav className="flex items-center justify-between px-2">
             <div className="logo">
-              <Image src='/defaultLogo.png' alt="logo" height={500} width={170}  className=""/>
+              <Image src='/defaultLogo.png' alt="logo" priority ={true} height={500} width={170}  className="w-auto h-auto"/>
             </div>
             <MenuItems/>
           </nav>

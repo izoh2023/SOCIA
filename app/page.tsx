@@ -1,29 +1,12 @@
 export default function Home() {
   return (
     <>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus saepe, magni ex repudiandae sunt facilis sed a repellendus voluptate dolor. Maiores doloribus quibusdam iste molestiae assumenda repellendus facere quidem expedita!</p>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus saepe, magni ex repudiandae sunt facilis sed a repellendus voluptate dolor. Maiores doloribus quibusdam iste molestiae assumenda repellendus facere quidem expedita!</p>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus saepe, magni ex repudiandae sunt facilis sed a repellendus voluptate dolor. Maiores doloribus quibusdam iste molestiae assumenda repellendus facere quidem expedita!</p>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus saepe, magni ex repudiandae sunt facilis sed a repellendus voluptate dolor. Maiores doloribus quibusdam iste molestiae assumenda repellendus facere quidem expedita!</p>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus saepe, magni ex repudiandae sunt facilis sed a repellendus voluptate dolor. Maiores doloribus quibusdam iste molestiae assumenda repellendus facere quidem expedita!</p>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus saepe, magni ex repudiandae sunt facilis sed a repellendus voluptate dolor. Maiores doloribus quibusdam iste molestiae assumenda repellendus facere quidem expedita!</p>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus saepe, magni ex repudiandae sunt facilis sed a repellendus voluptate dolor. Maiores doloribus quibusdam iste molestiae assumenda repellendus facere quidem expedita!</p>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus saepe, magni ex repudiandae sunt facilis sed a repellendus voluptate dolor. Maiores doloribus quibusdam iste molestiae assumenda repellendus facere quidem expedita!</p>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus saepe, magni ex repudiandae sunt facilis sed a repellendus voluptate dolor. Maiores doloribus quibusdam iste molestiae assumenda repellendus facere quidem expedita!</p>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus saepe, magni ex repudiandae sunt facilis sed a repellendus voluptate dolor. Maiores doloribus quibusdam iste molestiae assumenda repellendus facere quidem expedita!</p>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus saepe, magni ex repudiandae sunt facilis sed a repellendus voluptate dolor. Maiores doloribus quibusdam iste molestiae assumenda repellendus facere quidem expedita!</p>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus saepe, magni ex repudiandae sunt facilis sed a repellendus voluptate dolor. Maiores doloribus quibusdam iste molestiae assumenda repellendus facere quidem expedita!</p>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus saepe, magni ex repudiandae sunt facilis sed a repellendus voluptate dolor. Maiores doloribus quibusdam iste molestiae assumenda repellendus facere quidem expedita!</p>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus saepe, magni ex repudiandae sunt facilis sed a repellendus voluptate dolor. Maiores doloribus quibusdam iste molestiae assumenda repellendus facere quidem expedita!</p>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus saepe, magni ex repudiandae sunt facilis sed a repellendus voluptate dolor. Maiores doloribus quibusdam iste molestiae assumenda repellendus facere quidem expedita!</p>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus saepe, magni ex repudiandae sunt facilis sed a repellendus voluptate dolor. Maiores doloribus quibusdam iste molestiae assumenda repellendus facere quidem expedita!</p>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus saepe, magni ex repudiandae sunt facilis sed a repellendus voluptate dolor. Maiores doloribus quibusdam iste molestiae assumenda repellendus facere quidem expedita!</p>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus saepe, magni ex repudiandae sunt facilis sed a repellendus voluptate dolor. Maiores doloribus quibusdam iste molestiae assumenda repellendus facere quidem expedita!</p>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus saepe, magni ex repudiandae sunt facilis sed a repellendus voluptate dolor. Maiores doloribus quibusdam iste molestiae assumenda repellendus facere quidem expedita!</p>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus saepe, magni ex repudiandae sunt facilis sed a repellendus voluptate dolor. Maiores doloribus quibusdam iste molestiae assumenda repellendus facere quidem expedita!</p>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus saepe, magni ex repudiandae sunt facilis sed a repellendus voluptate dolor. Maiores doloribus quibusdam iste molestiae assumenda repellendus facere quidem expedita!</p>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus saepe, magni ex repudiandae sunt facilis sed a repellendus voluptate dolor. Maiores doloribus quibusdam iste molestiae assumenda repellendus facere quidem expedita!</p>
-
+    <div className="h-screen flex flex-col justify-center gap-y-4 text-center ">
+      <h1 className="font-bold text-2xl animate-bounce">welcome student namanisha wewe spencer</h1>
+      <p className="font-semibold text-xl">this is the homepage</p>
+      <p className="font-medium text-lg">navigate to <a href="http://localhost:3000/apiclient" className="underline text-blue-500 hover:text-blue-800"> http://localhost:3000/apiclient </a> to register</p>
+    </div>
+      
     </>
   );
 }
