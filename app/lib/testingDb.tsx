@@ -16,3 +16,5 @@ if (!pool) {
         connectTimeout: 28800, //28 seconds
     });
 }
+
+export default pool!;
