@@ -16,7 +16,7 @@ const handler = async (req:NextRequest)=> {
     switch(req.method) {
         case 'GET': {
             try {
-                const [rows] = await pool.query('SELECT * FROM person');
+                const [rows] = await pool.execute('SELECT * FROM person');
                 // console.log(rows);
                 return NextResponse.json(
                     rows,
@@ -43,7 +43,7 @@ const handler = async (req:NextRequest)=> {
         
         
             try {
-                const [results] = await pool.query<ResultSetHeader>(
+                const [results] = await pool.execute<ResultSetHeader>(
                     'INSERT INTO `person` (`ID`, `fname`, `sname`, `telNumber`) VALUES (?,?,?,?)',
                     [ID,fname,sname,telNumber]
         
@@ -83,7 +83,7 @@ const handler = async (req:NextRequest)=> {
                 )   
             }
             try {
-                const [results] =  await pool.query<ResultSetHeader>(
+                const [results] =  await pool.execute<ResultSetHeader>(
                     'UPDATE `person` SET `fname` = ?, `sname` = ?, `telNumber` = ? WHERE `person`.`ID` = ?',
                     [fname, sname, telNumber,ID]
                 );
@@ -115,7 +115,7 @@ const handler = async (req:NextRequest)=> {
                 )
             }
             try {
-                const [results] = await pool.query<ResultSetHeader>(
+                const [results] = await pool.execute<ResultSetHeader>(
                     'DELETE FROM person WHERE ID = ?',
                     [ID]
                 )
