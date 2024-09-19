@@ -23,6 +23,7 @@ const handler = async (req:NextRequest)=> {
                     rows,
                     { status: 200 }
                 );
+                con.release()
             } catch (error) {
                 return NextResponse.json(
                     { error: 'Failed to reach the database' },
