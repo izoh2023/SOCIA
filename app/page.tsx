@@ -75,7 +75,7 @@ const Page = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await fetch('/restAPI')
+        const res = await fetch('https://socia-dun.vercel.app/restAPI')
         const data: person[] = await res.json();
         console.log(data);
         setRows(data); // Update state to trigger re-render
@@ -91,7 +91,7 @@ const Page = () => {
   const handleClick = async (e: { preventDefault: () => void }) => {
     e.preventDefault(); // Prevent form from submitting and refreshing the page
     try {
-      const res = await fetch('/restAPI', {
+      const res = await fetch('https://socia-dun.vercel.app/restAPI', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -110,7 +110,7 @@ const Page = () => {
 //handle PUT operation
 const handleUpdate =async ()=> {
   try {
-    const res = await fetch('/restAPI', {
+    const res = await fetch('https://socia-dun.vercel.app/restAPI', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
@@ -132,7 +132,7 @@ const handleUpdate =async ()=> {
 //handle DELETE operation
 const handleDelete = async () => {
   try {
-    const ApiResponse = await fetch('/restAPI',{
+    const ApiResponse = await fetch('https://socia-dun.vercel.app/restAPI',{
       method: 'DELETE',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(data)
