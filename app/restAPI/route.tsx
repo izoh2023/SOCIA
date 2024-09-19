@@ -18,7 +18,7 @@ const handler = async (req: NextRequest) => {
 
         switch (req.method) {
             case 'GET': {
-                const [rows] = await con.execute('EXPLAIN SELECT ID, fname, sname, telNumber FROM person');
+                const [rows] = await con.execute('SELECT ID, fname, sname, telNumber FROM person');
                 return NextResponse.json(rows, { status: 200 });
             }
 
