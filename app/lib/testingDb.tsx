@@ -10,7 +10,8 @@ if (!pool) {
         database: 'testing',
         waitForConnections: true,
         connectionLimit: 10,
-        queueLimit: 0
+        queueLimit: 0,
+        connectTimeout: 28800,  // 10 seconds
     });
 }
 

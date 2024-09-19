@@ -65,7 +65,9 @@ const handler = async (req: NextRequest) => {
                     [ID]
                 );
                 if (results.affectedRows === 0) {
-                    return NextResponse.json('ID does not exist', { status: 404 });
+                    return NextResponse.json(
+                        'ID does not exist',
+                        { status: 404 });
                 }
                 return NextResponse.json('Record deleted successfully', { status: 200 });
             }
