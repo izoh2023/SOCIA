@@ -37,8 +37,8 @@ const MenuItems = () => {
             id="myMenu"
           >
             <Link href="/" className="px-3 py-2 rounded-md text-sm font-medium hover:underline">Home</Link>
-            <Link href="/about" className="px-3 py-2 rounded-md text-sm font-medium">About</Link>
-            <Link href="/services" className="px-3 py-2 rounded-md text-sm font-medium">Service</Link>
+            <Link href="/" className="px-3 py-2 rounded-md text-sm font-medium">About</Link>
+            <Link href="/" className="px-3 py-2 rounded-md text-sm font-medium">Service</Link>
           </div>
           <button 
             ref={buttonRef}
