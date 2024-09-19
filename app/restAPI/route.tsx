@@ -17,7 +17,7 @@ const handler = async (req:NextRequest)=> {
         case 'GET': {
             try {
                 const con = await pool.getConnection();
-                const [rows] = await con.execute('SELECT * FROM person');
+                const [rows] = await con.execute('select ID,fname,sname,telNumber from person');
                 // console.log(rows);
                 return NextResponse.json(
                     rows,
