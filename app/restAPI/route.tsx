@@ -61,6 +61,8 @@ const handler = async (req:NextRequest)=> {
                     'record created successfully',
                     {status: 200}
                 )
+                con.release()
+
                 
             } catch (error) {
                 const err = error as myError
@@ -101,6 +103,8 @@ const handler = async (req:NextRequest)=> {
                     'record updated succcessfully',
                     {status:200}
                 )   
+                con.release()
+
             } catch (error) {
                 return NextResponse.json(
                     'failed to reach the database',
@@ -134,6 +138,8 @@ const handler = async (req:NextRequest)=> {
                     'record deleted successfully',
                     {status: 200}
                 );
+                con.release()
+
             } catch (error) {
                 console.log(error);
             }
