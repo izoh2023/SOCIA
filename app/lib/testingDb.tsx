@@ -11,7 +11,7 @@ if (!pool) {
         waitForConnections: true,
         connectionLimit: 10,
         queueLimit: 0,
-        connectTimeout: 28800,  // 10 seconds
+        connectTimeout: 28800, //28 seconds
     });
 }
 
