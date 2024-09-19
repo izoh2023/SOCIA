@@ -4,9 +4,9 @@ let pool: Pool | undefined;
 
 if (!pool) {
     pool = mysql.createPool({
-        host: 'localhost',
-        user: 'root',
-        password: '', // Ensure this is correct
+        host: 'ci-cd.mysql.database.azure.com',
+        user: 'isaac',
+        password: 'Azure@success', // Ensure this is correct
         database: 'testing',
         waitForConnections: true,
         connectionLimit: 10,
