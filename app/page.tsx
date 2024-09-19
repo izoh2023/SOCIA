@@ -75,7 +75,7 @@ const Page = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await fetch('http://localhost:3000/restAPI')
+        const res = await fetch('/restAPI')
         const data: person[] = await res.json();
         console.log(data);
         setRows(data); // Update state to trigger re-render
