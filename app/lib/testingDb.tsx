@@ -1,6 +1,10 @@
+import fs from 'fs';
 import mysql, { Pool } from 'mysql2/promise';
 
 let pool: Pool | undefined;
+const serverCa = [fs.readFileSync("/var/www/html/DigiCertGlobalRootCA.crt.pem", "utf8")];
+
+// let conn: Connection
 
 if (!pool) {
     pool = mysql.createPool({
@@ -9,7 +13,10 @@ if (!pool) {
         user: 'isaac',
         password: 'Azure@success', // Ensure this is correct
         database: 'testing',
-        ssl: 'require',
+        ssl: {
+            rejectUnauthorized: true,
+            ca: serverCa
+        },
         waitForConnections: true,
         connectionLimit: 10,
         queueLimit: 0,
@@ -17,4 +24,8 @@ if (!pool) {
     });
 }
 
+
+
+
 export default pool!;
+
