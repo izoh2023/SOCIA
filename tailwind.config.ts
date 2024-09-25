@@ -12,6 +12,20 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      keyframes: {
+        enter: {
+          "0%": { transform: "translate3d(0, 0, 0)" },
+          "100%": { transform: "translate3d(40px, 40px, 0)" },
+        },
+        appear: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        }
+      },
+      animation: {
+          enter: "enter 1s ease-in-out  both",
+          appear: "appear 2s ease-in-out  ",
+      },
     },
   },
   plugins: [],

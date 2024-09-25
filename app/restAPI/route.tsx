@@ -15,11 +15,13 @@ const handler = async (req: NextRequest) => {
     let con;
     try {
         con = await pool.getConnection(); // Connect to the database
-
         switch (req.method) {
             case 'GET': {
                 const [rows] = await con.execute('SELECT ID, fname, sname, telNumber FROM person');
-                return NextResponse.json(rows, { status: 200 });
+                return NextResponse.json(
+                    rows,
+                    {status: 200}
+                )
             }
 
             case 'POST': {
@@ -82,11 +84,12 @@ const handler = async (req: NextRequest) => {
             return NextResponse.json('This ID already exists in the system', { status: 409 });
         }
         return NextResponse.json('Failed to connect to the database', { status: 500 });
-    } finally {
-        if (con) {
-            con.release(); // Ensure the connection is released
-        }
-    }
+    } 
+    // finally {
+    //     if (con) {
+    //         con.release(); // Ensure the connection is released
+    //     }
+    // }
 };
 
 export async function GET(req: NextRequest) {
