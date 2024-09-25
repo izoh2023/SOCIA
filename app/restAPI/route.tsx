@@ -85,11 +85,11 @@ const handler = async (req: NextRequest) => {
         }
         return NextResponse.json('Failed to connect to the database', { status: 500 });
     } 
-    // finally {
-    //     if (con) {
-    //         con.release(); // Ensure the connection is released
-    //     }
-    // }
+    finally {
+        if (con) {
+            con.release(); // Ensure the connection is released
+        }
+    }
 };
 
 export async function GET(req: NextRequest) {
