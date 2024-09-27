@@ -1,25 +1,32 @@
-import pool from "@/app/lib/testingDb";
-import { ResultSetHeader } from "mysql2";
 import { NextRequest, NextResponse } from "next/server";
+import run from "../lib/testingDb";
+// import { ResultSetHeader } from "mysql2";
+// import { NextRequest, NextResponse } from "next/server";
 
-interface myError {
-    message: string;
-    code: string;
-    errno: number;
-    sql: string;
-    sqlState: string;
-}
+// interface myError {
+//     message: string;
+//     code: string;
+//     errno: number;
+//     sql: string;
+//     sqlState: string;
+// }
 
 // API logic for all the CRUD operations
 const handler = async (req: NextRequest) => {
-    let con;
     try {
-        con = await pool.getConnection(); // Connect to the database
+        const schoolDb =await run();
+        const studentDoc = schoolDb.collection('students')
         switch (req.method) {
             case 'GET': {
-                const [rows] = await con.execute('SELECT ID, fname, sname, telNumber FROM person');
+                const student = await studentDoc.find().toArray();
+                if(!student){
+                    return NextResponse.json(
+                        'no student in the student document',
+                        {status:404}
+                    )
+                }
                 return NextResponse.json(
-                    rows,
+                    student,
                     {status: 200}
                 )
             }
@@ -27,18 +34,47 @@ const handler = async (req: NextRequest) => {
             case 'POST': {
                 const body = await req.json();
                 const { ID, fname, sname, telNumber } = body;
+            
+                // Check for missing required fields
                 if (!ID || !fname || !sname || !telNumber) {
-                    return NextResponse.json('Missing required fields', { status: 404 });
+                    return NextResponse.json(
+                        { message: 'Missing required fields' },
+                        { status: 400 } // Use 400 for Bad Request
+                    );
                 }
-                const [results] = await con.execute<ResultSetHeader>(
-                    'INSERT INTO person (ID, fname, sname, telNumber) VALUES (?, ?, ?, ?)',
-                    [ID, fname, sname, telNumber]
-                );
-                if (results.affectedRows < 1) {
-                    return NextResponse.json('Failed to create record', { status: 201 });
+            
+                try {
+                    // Check if a record with the same ID already exists
+                    const existingStudent = await studentDoc.findOne({ _id: ID });
+                    if (existingStudent) {
+                        return NextResponse.json(
+                            { message: 'ID already exists, choose a different ID' },
+                            { status: 409 } // Conflict status code
+                        );
+                    }
+            
+                    // Insert the new record with the provided ID
+                    const newStudent = {
+                        _id: ID, // Use the provided ID as the unique identifier
+                        fname,
+                        sname,
+                        telNumber,
+                    };
+            
+                    await studentDoc.insertOne(newStudent); // Ensure this is awaited
+                    return NextResponse.json(
+                        { message: 'Record added successfully' },
+                        { status: 201 } // Created status code
+                    );
+                } catch (error) {
+                    console.error('Database insertion error:', error);
+                    return NextResponse.json(
+                        { message: 'Failed to add record' },
+                        { status: 500 } // Server error
+                    );
                 }
-                return NextResponse.json('Record created successfully', { status: 200 });
             }
+            
 
             case 'PUT': {
                 const body = await req.json();
@@ -46,14 +82,31 @@ const handler = async (req: NextRequest) => {
                 if (!ID || !fname || !sname || !telNumber) {
                     return NextResponse.json('Missing required fields', { status: 404 });
                 }
-                const [results] = await con.execute<ResultSetHeader>(
-                    'UPDATE person SET fname = ?, sname = ?, telNumber = ? WHERE ID = ?',
-                    [fname, sname, telNumber, ID]
-                );
-                if (results.affectedRows === 0) {
-                    return NextResponse.json('ID does not exist', { status: 404 });
+                const query = { _id: ID }; // Use the ID as the query to find the document
+                const update = {
+                    $set: { 
+                        fname: fname, 
+                        sname: sname, 
+                        telNumber: telNumber 
+                    }
+                };
+
+                const result = await studentDoc.updateOne(query, update);
+
+                if (result.matchedCount > 0) {
+                    console.log('Document updated successfully');
+                    return NextResponse.json(
+                        'Document updated successfully',
+                        {status: 200}
+                    )
+                } else {
+                    console.log('No document matches the provided ID');
+                    return NextResponse.json(
+                        'No document matches the provided ID',
+                        {status: 404}
+                    )
                 }
-                return NextResponse.json('Record updated successfully', { status: 200 });
+
             }
 
             case 'DELETE': {
@@ -62,43 +115,48 @@ const handler = async (req: NextRequest) => {
                 if (!ID) {
                     return NextResponse.json('Missing ID field', { status: 404 });
                 }
-                const [results] = await con.execute<ResultSetHeader>(
-                    'DELETE FROM person WHERE ID = ?',
-                    [ID]
-                );
-                if (results.affectedRows === 0) {
+                const query = { _id: ID }; // Use the ID as the query to find the document
+
+                const result = await studentDoc.deleteOne(query);
+        
+                if (result.deletedCount > 0) {
+                    console.log('Document deleted successfully');
                     return NextResponse.json(
-                        'ID does not exist',
-                        { status: 404 });
+                        'Document deleted successfully',
+                        {status: 200}
+                    )
+                } else {
+                    console.log('No document matches the provided ID');
+                    return NextResponse.json(
+                        'No document matches the provided ID',
+                        {status: 404}
+                    )
                 }
-                return NextResponse.json('Record deleted successfully', { status: 200 });
             }
 
             default:
-                return NextResponse.json('Method not allowed', { status: 405 });
+                return NextResponse.json(
+                    'Method not allowed', 
+                    { status: 405 });
         }
     } catch (error) {
-        const err = error as myError;
-        console.error(err);
-        if (err.errno === 1062) {
-            return NextResponse.json('This ID already exists in the system', { status: 409 });
-        }
-        return NextResponse.json('Failed to connect to the database', { status: 500 });
+        return NextResponse.json(
+            'Failed to connect to the database', 
+            { status: 500 }
+        );
     } 
-    finally {
-        if (con) {
-            con.release(); // Ensure the connection is released
-        }
-    }
+    
 };
 
 export async function GET(req: NextRequest) {
     return handler(req);
 }
 
+
 export async function POST(req: NextRequest) {
     return handler(req);
 }
+
 
 export async function PUT(req: NextRequest) {
     return handler(req);

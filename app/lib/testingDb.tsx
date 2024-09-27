@@ -1,35 +1,22 @@
-// import fs from 'fs';
-import mysql, { Pool } from 'mysql2/promise';
+import { MongoClient } from "mongodb";
 
-let pool: Pool | undefined;
-// const serverCa = [fs.readFileSync("/var/www/html/DigiCertGlobalRootCA.crt.pem", "utf8")];
+// Replace the uri string with your connection string.
+const uri = process.env.MONGODB_URI ||'mongodb+srv://isaac:MongoDb21@cluster0.6ltkp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
 
-// let conn: Connection
+const client = new MongoClient(uri!);
 
-if (!pool) {
-    pool = mysql.createPool({
-        // host: 'ci-cd.mysql.database.azure.com',
-        // port:3306,
-        // user: 'isaac',
-        // password: 'Azure@success', // Ensure this is correct
-        // database: 'testing',
-        // ssl: {
-        //     rejectUnauthorized: true,
-        //     ca: serverCa
-        // },
-        host: 'localhost',
-        user: 'isaac',
-        password: '',
-        database: 'testing',
-        waitForConnections: true,
-        connectionLimit: 10,
-        queueLimit: 0,
-        // connectTimeout: 28800, //28 seconds
-    });
+export default async function run() {
+  try {
+    // Connect to the database
+    await client.connect();
+    
+    const schoolDb = client.db('school');
+    console.log('Connected to database');
+    
+    // Return the school database object
+    return schoolDb;
+  } catch (error) {
+    console.error('Error connecting to the database', error);
+    throw error;
+  }
 }
-
-
-
-
-export default pool!;
-

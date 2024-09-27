@@ -3,10 +3,10 @@ import { NextResponse } from 'next/server'
 import React, { useEffect, useState } from 'react'
 
 interface person {
-  ID: number,
-  fname: string,
-  sname: string,
-  telNumber: string
+  _ID: number; 
+  fname: string;
+  sname: string;
+  telNumber: string;
 }
 
 const Page = () => {
@@ -39,18 +39,18 @@ const Page = () => {
          // Get all the cell values in that row
          const cells = row.getElementsByTagName('td');
          const rowData: person = {
-           ID: parseInt(cells[1]?.textContent || "0"), // Convert ID to number
+           _ID: parseInt(cells[1]?.textContent || "0"), // Convert ID to number
            fname: cells[2]?.textContent || "",         // First name as string
            sname: cells[3]?.textContent || "",         // Second name as string
            telNumber: cells[4]?.textContent || ""      // Tel number as string
          }
-         setID(rowData.ID);
+         setID(rowData._ID);
          setFname(rowData.fname);
          setSname(rowData.sname);
          setTelNumber(rowData.telNumber)
          
          const idField = (document.getElementById('ID') as HTMLInputElement);
-         idField.valueAsNumber = rowData.ID || 0;
+         idField.valueAsNumber = rowData._ID || 0;
          idField.readOnly = true;
          (document.getElementById('fname') as HTMLInputElement).value =rowData.fname || '';
          (document.getElementById('sname') as HTMLInputElement).value = rowData.sname || '';     
@@ -193,7 +193,7 @@ const handleDelete = async () => {
         </thead>
         <tbody>
           {rows.map((row)=>(
-            <tr key={row.ID} className='border-t-2 border-b-2 border-l-2 border-r-2 border-black text-center' >
+            <tr key={row._ID} className='border-t-2 border-b-2 border-l-2 border-r-2 border-black text-center' >
               <td className='w-12 h-12 border-t-2 border-b-2 border-l-2 border-r-2 border-black'>
                 <button className='get-row-data w-6 h-6'>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 30 30" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -204,7 +204,7 @@ const handleDelete = async () => {
                   </svg>
                 </button>
               </td>
-              <td className='border-t-2 border-b-2 border-l-2 border-r-2 border-black'>{row.ID}</td>
+              <td className='border-t-2 border-b-2 border-l-2 border-r-2 border-black'>{row._ID}</td>
               <td className='border-t-2 border-b-2 border-l-2 border-r-2 border-black'>{row.fname}</td>
               <td className='border-t-2 border-b-2 border-l-2 border-r-2 border-black'>{row.sname}</td>
               <td className='border-t-2 border-b-2 border-l-2 border-r-2 border-black'>{row.telNumber}</td>
